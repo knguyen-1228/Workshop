@@ -6,35 +6,128 @@ import java.util.Scanner;
 
 public class NeighborhoodLibraryApp {
 
+    static Books[] theBooks = {
+            new Books(1, "1234", "Ready Player 1"),
+            new Books(2, "2345", "Alice in Wonderland"),
+            new Books(3, "3456", "A Court of Throne and Roses"),
+            new Books(4, "4567", "A Court of Mist and Fury"),
+            new Books(5, "5678", "A Court of Wings and Ruin"),
+            new Books(6, "6790", "A Court of Frost and Starlight"),
+            new Books(7, "12345", "A Court of Silver Flames"),
+            new Books(8, "23456", "The Midnight Library"),
+            new Books(9, "34567", "Where the Crawdads Sing"),
+            new Books(10, "45678", "1984"),
+            new Books(11, "56789", "Verity"),
+            new Books(12, "67890", "The Alchemist"),
+            new Books(13, "1123", "To Kill a Mockingbird"),
+            new Books(14, "2234", "The Book Thief"),
+            new Books(15, "3345", "The Lightning Thief"),
+            new Books(16, "4456", "The Sea of Monsters"),
+            new Books(17, "5567", "The Titan's Curse"),
+            new Books(18, "6678", "The Battle of the Labyrinth"),
+            new Books(19, "7789", "The Last Olympian"),
+            new Books(20, "8890", "Atomic Habits"),
+
+
+    };
+
     static Scanner myScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        welcome();
-        homeScreen();
-        while (true){
-            String choice =askName("What would you like to do? \t");
+        boolean appRunning = true;
+        while(appRunning) {
+            int hChoice = mainMenu();
+            switch (hChoice) {
+                case 1:
+                    int userBookChoice = viewAvailableBooks();
+                    myScanner.nextLine();
+                    if (userBookChoice != -1) {
+                        System.out.println("what is your name?");
+                        String userName = myScanner.nextLine();
+                        theBooks[userBookChoice].checkedOutTo(userName);
+                    }
+                    break;
+                case 2:
+                    System.out.println("Below are the books that are checked out");
+                    int bookUnavailiable = viewCheckedBooks();
+                    if(bookUnavailiable == -1){
+                        continue;
+                    }
+                    if(bookUnavailiable < theBooks.length){
+                        myScanner.nextLine();
 
-            if(choice.equalsIgnoreCase("1")){
-                availableBooks();
+                        theBooks[bookUnavailiable].checkIn();
 
-            } else if(choice.equalsIgnoreCase("2")){
-                checkedOutBooks();
-
-            }else if(choice.equalsIgnoreCase("3")){
-                System.out.println("Good Bye! See you next time");
-
-            }else{
-                System.out.println("\nInvalid response: Returning to Home Screen\n");
-                homeScreen();
+                        System.out.println("\n" + theBooks[bookUnavailiable].getTitle() + "has been returned to the library!\n");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Exiting the App");
+                    appRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
             }
         }
 
 
 
     }
+    static int mainMenu(){
+        System.out.println("Welcome to the Neighborhood Library!");
+        System.out.println("---------------------------------------------------------");
 
-    public static void welcome(){
+        System.out.println("\nHome Screen");
+        System.out.println("----------------------------------------------");
+        System.out.println("[1] Show Available Books \n[2] Show Checked Out Books \n[3] Closes Out of the App ");
+        System.out.println("What would you like to do?");
+        return myScanner.nextInt();
+    }
+
+    static int viewAvailableBooks(){
+
+        System.out.println("These are the availalbe books! \n");
+        for (int i = 0; i<theBooks.length;i++) {
+            Books currentBook = theBooks[i];
+
+            if (currentBook.isCheckedOut() == false) {
+                System.out.println("id: " + i + " isbn: " + currentBook.getIsbn() + " - " + currentBook.getTitle());
+            }
+        }
+        myScanner.nextLine();
+        System.out.println("\nWould you like to check out a book? (y/n)");
+        String userSelection = myScanner.nextLine();
+        if (userSelection.equalsIgnoreCase("y") || userSelection.equalsIgnoreCase("yes")){
+            System.out.println("Please enter the id of the book you want to check out");
+            return myScanner.nextInt();
+            }
+
+        return mainMenu();
+    }
+
+    static int viewCheckedBooks(){
+        for (int i = 0; i<theBooks.length;i++) {
+            Books currentBook = theBooks[i];
+
+            if (currentBook.isCheckedOut()) {
+                System.out.println("id: " + i + " isbn: " + currentBook.getIsbn() + " - " + currentBook.getTitle() + " checked out to " + currentBook.getCheckedOutTo());
+            }
+        }
+        myScanner.nextLine();
+        System.out.println("Would you like to: \n [C] Check in a book \n [X] Go back to home");
+        String userInput = myScanner.nextLine();
+        if(userInput.equalsIgnoreCase("c")){
+            System.out.println("Please enter the id of the book you'd like to check in");
+            return myScanner.nextInt();
+        }else{
+            System.out.println("Returning to home");
+            return mainMenu();
+        }
+
+    }
+
+    /*public static String welcome(){
         System.out.println("Welcome to the Neighborhood Library!");
         System.out.println("---------------------------------------------------------");
         System.out.print("\n");
@@ -45,6 +138,7 @@ public class NeighborhoodLibraryApp {
 
         System.out.println("Welcome " + infoAnswer + "!");
         System.out.print("\n");
+        return myScanner.nextLine();
     }
 
 
@@ -54,30 +148,40 @@ public class NeighborhoodLibraryApp {
 
         return nameAnswer.trim();
     }
-    public static void homeScreen(){
+    static int homeScreen(){
         System.out.println("Home Screen");
         System.out.println("----------------------------------------------");
         System.out.println("[1] Show Available Books \n[2] Show Checked Out Books \n[3] Closes Out of the App ");
 
+        return myScanner.nextInt();
+
     }
-    public static void availableBooks(){
+    static int availableBooksScreen(){
         //display id, isbn, and title
         System.out.println("Available Books");
         System.out.println("----------------------------------------------");
         System.out.println("Please select which book you'd like to check out \n[X] Return to the home screen");
 
+        return myScanner.nextInt();
+
     }
-    public static void checkedOutBooks(){
+    static int checkedOutBooksScreen(){
         //display id,isbn, title, and name of person who has the book
         System.out.println("Checked Out Books");
         System.out.println("----------------------------------------------");
         System.out.println("[C] Check In a book \n[X] Return to the home screen");
 
+        return myScanner.nextInt();
+
     }
-    public static void checkInBook(){
+    static int checkInBookScreen(){
         System.out.println("Check In");
         System.out.println("----------------------------------------------");
         System.out.println("Enter the ID of the book you want to Check In \n[X] Return to the home screen");
 
-    }
+        return myScanner.nextInt();
+
+    }*/
+
+
 }
