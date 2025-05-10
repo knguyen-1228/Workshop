@@ -19,7 +19,7 @@ public class Dealership {
 
     public ArrayList<Vehicle> getVehicleByPrice(double min, double max){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by price:");
+        System.out.println("\n\nHere is a list of vehicle by price:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getPrice() >= min && v.getPrice() <= max) {
@@ -34,7 +34,7 @@ public class Dealership {
     }
     public ArrayList<Vehicle> getVehicleByMakeModel(String make, String model){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by make and model:");
+        System.out.println("\n\nHere is a list of vehicle by make and model:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
@@ -50,7 +50,7 @@ public class Dealership {
     }
     public ArrayList<Vehicle> getVehicleByYear(int min, int max){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by year:");
+        System.out.println("\n\nHere is a list of vehicle by year:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getYear() >= min && v.getYear() <= max) {
@@ -66,7 +66,7 @@ public class Dealership {
     }
     public ArrayList<Vehicle> getVehicleByColor(String color){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by color:");
+        System.out.println("\n\nHere is a list of vehicle by color:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getColor().equalsIgnoreCase(color)) {
@@ -82,7 +82,7 @@ public class Dealership {
     }
     public ArrayList<Vehicle> getVehicleByMileage(int min, int max){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by milage:");
+        System.out.println("\n\nHere is a list of vehicle by milage:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getOdometer() >= min && v.getOdometer() <= max) {
@@ -98,7 +98,7 @@ public class Dealership {
     }
     public ArrayList<Vehicle> getVehicleByType(String type){
         ArrayList<Vehicle> output = new ArrayList<>();
-        System.out.println("Here is a list of vehicle by type:");
+        System.out.println("\n\nHere is a list of vehicle by type:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             if(v.getType().equalsIgnoreCase(type)){
@@ -114,7 +114,7 @@ public class Dealership {
     }
 
     public void displayAllVehicles(){
-        System.out.println("Here is a list of all vehicles:");
+        System.out.println("\n\nHere is a list of all vehicles:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
             System.out.printf("%d %d %s %s %s %s %d $%.2f%n ",v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getType(),v.getColor(),v.getOdometer(),v.getPrice());

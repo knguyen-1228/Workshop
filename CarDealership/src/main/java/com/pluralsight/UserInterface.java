@@ -8,11 +8,13 @@ public class UserInterface {
     private UserInterface(){};
     static Scanner myScanner = new Scanner(System.in);
 
-    public static int display(){
+    public static void display(){
         init();
-        int userChoice = -1;
-        while(true){
-            System.out.println("Welcome to D&B Used Cars!" +
+        boolean menuRunning = true;
+        while(menuRunning){
+            System.out.println( "\n \n " +
+                                "Welcome to D&B Used Cars!" +
+                                "\n \n " +
                                 "\n[1] Find vehicles within a price range" +
                                 "\n[2] Find vehicles by make / model" +
                                 "\n[3] Find vehicles by year range" +
@@ -24,21 +26,53 @@ public class UserInterface {
                                 "\n[9] Remove a vehicle" +
                                 "\n[0] Quit" +
                                 "\nWhat would you like to do?");
-            try {
+            int userChoice;
+            if(myScanner.hasNextInt()){
                 userChoice = myScanner.nextInt();
                 myScanner.nextLine();
-                if (userChoice <= 9 && userChoice >= 0) {
-                    break;
-                }else{
-                    System.out.println("Please enter a valid input between 0-9!");
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid input! Please enter a number!");
+            }else{
                 myScanner.nextLine();
+                userChoice = -1;
             }
-        }
-        return userChoice;
 
+
+            switch(userChoice){
+                case 1:
+                    processGetByPriceRequest();
+                    break;
+                case 2:
+                    processGetByMakeModelRequest();
+                    break;
+                case 3:
+                    processGetByYearRequest();
+                    break;
+                case 4:
+                    processGetByColorRequest();
+                    break;
+                case 5:
+                    processGetByMilageRequest();
+                    break;
+                case 6:
+                    processGetByTypeRequest();
+                    break;
+                case 7:
+                    processGetAllVehicleRequest();
+                    break;
+                case 8:
+                    processAddVehicleRequest();
+                    break;
+                case 9:
+                    processRemoveVehicleRequest();
+                    break;
+                case 0:
+                    System.out.println("Thank you for visiting D&B Used Cars! Have a nice day!");
+                    menuRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid input");
+            }
+
+        }
     }
     private static void init(){
         DealershipFileManager dfm = new DealershipFileManager();
@@ -138,7 +172,7 @@ public class UserInterface {
         Vehicle newVehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
         dealership.addVehicle(newVehicle);
 
-        System.out.println("Vehicle has been added");
+        System.out.println("\n\nVehicle has been added");
 
     }
     public static void processRemoveVehicleRequest(){
@@ -155,7 +189,7 @@ public class UserInterface {
         }
         if(vehicleToRemove != null){
             dealership.removeVehicle(vehicleToRemove);
-            System.out.println("Vehicle was removed");
+            System.out.println("\n\nVehicle was removed");
         }
     }
 
