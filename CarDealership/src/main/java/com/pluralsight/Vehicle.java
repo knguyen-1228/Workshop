@@ -20,6 +20,10 @@ public class Vehicle {
         this.odometer = odometer;
         this.price = price;
     }
+    @Override
+    public String toString(){
+        return vin + " " + year + " " + make + " " + model + " " + type + " " + color + " " + odometer + " $" + price;
+    }
 
     public int getVin() {
         return vin;
@@ -78,7 +82,7 @@ public class Vehicle {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {

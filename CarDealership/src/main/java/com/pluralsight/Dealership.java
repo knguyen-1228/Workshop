@@ -7,56 +7,130 @@ public class Dealership {
     private String address;
     private String phone;
 
-    private ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private ArrayList<Vehicle> vehicles;
 
     public Dealership(String name, String phone, String address) {
         this.name = name;
         this.phone = phone;
         this.address = address;
+
+        vehicles = new ArrayList<>();
     }
 
-    public static void getVehicleByPrice(double min, double max){
+    public ArrayList<Vehicle> getVehicleByPrice(double min, double max){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by price:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getPrice() >= min && v.getPrice() <= max) {
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
 
     }
-    public static void getVehicleByMakeModel(String make, String model){
+    public ArrayList<Vehicle> getVehicleByMakeModel(String make, String model){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by make and model:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
+
 
     }
-    public static void getVehicleByYear(int min, int max){
+    public ArrayList<Vehicle> getVehicleByYear(int min, int max){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by year:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getYear() >= min && v.getYear() <= max) {
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
+
 
     }
-    public static void getVehicleByColor(String color){
+    public ArrayList<Vehicle> getVehicleByColor(String color){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by color:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getColor().equalsIgnoreCase(color)) {
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
+
 
     }
-    public static void getVehicleByMileage(int min, int max){
+    public ArrayList<Vehicle> getVehicleByMileage(int min, int max){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by milage:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getOdometer() >= min && v.getOdometer() <= max) {
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
+
 
     }
-    public static void getVehicleByType(String type){
+    public ArrayList<Vehicle> getVehicleByType(String type){
+        ArrayList<Vehicle> output = new ArrayList<>();
+        System.out.println("Here is a list of vehicle by type:");
+        for(int i = 0; i<vehicles.size();i++){
+            Vehicle v = vehicles.get(i);
+            if(v.getType().equalsIgnoreCase(type)){
+                output.add(v);
+            }
+        }
+        for(Vehicle v: output){
+            System.out.println(v);
+        }
+        return output;
+
 
     }
 
-    public static void getAllVehicles(ArrayList<Vehicle> vehicles){
+    public void displayAllVehicles(){
         System.out.println("Here is a list of all vehicles:");
         for(int i = 0; i<vehicles.size();i++){
             Vehicle v = vehicles.get(i);
-            System.out.printf("%d %tY %s %s %s %s %d $%.2f%n ",v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getType(),v.getColor(),v.getOdometer(),v.getPrice());
+            System.out.printf("%d %d %s %s %s %s %d $%.2f%n ",v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getType(),v.getColor(),v.getOdometer(),v.getPrice());
         }
 
     }
 
-    public static void addVehicle(Vehicle vehicle){
-
+    public void addVehicle(Vehicle vehicle){
+        vehicles.add(vehicle);
     }
 
-    public static void removeVehicle(Vehicle vehicle){
-
+    public void removeVehicle(Vehicle vehicle){
+        vehicles.remove(vehicle);
     }
-    public static ArrayList<Vehicle> getVehicles(){
-        Dealership dealership = DealershipFileManager.getDealership();
-        if(dealership != null){
-            return dealership.vehicles;
-        }else{
-            return new ArrayList<Vehicle>();
-        }
+    public ArrayList<Vehicle> getVehicles(){
+        return vehicles;
     }
 
     public String getName() {
