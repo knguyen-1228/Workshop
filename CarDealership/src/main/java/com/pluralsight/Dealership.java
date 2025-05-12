@@ -16,7 +16,7 @@ public class Dealership {
 
         vehicles = new ArrayList<>();
     }
-
+    
     public ArrayList<Vehicle> getVehicleByPrice(double min, double max){
         ArrayList<Vehicle> output = new ArrayList<>();
         System.out.println("\n\nHere is a list of vehicle by price:");
