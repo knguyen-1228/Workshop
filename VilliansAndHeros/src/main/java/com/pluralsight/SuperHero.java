@@ -15,11 +15,13 @@ public class SuperHero extends SuperPerson{
     @Override
     public void fight(SuperPerson opponent){
         int damageAmount = new Random().nextInt(21);
+        int totalDamage = damageAmount + experiencePoints;
         if(damageAmount == 0){
             System.out.println(this.name + " has missed!");
         }else{
-            opponent.takeDamage(damageAmount + experiencePoints);
-            
+            System.out.println(this.name + " hits " + opponent.name + " with a web shot for " + totalDamage);
+            opponent.takeDamage(totalDamage);
+
         }
     }
 }
