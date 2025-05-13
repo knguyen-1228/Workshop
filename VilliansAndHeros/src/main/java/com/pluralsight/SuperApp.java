@@ -1,6 +1,9 @@
 package com.pluralsight;
 
+import java.util.HashMap;
+
 public class SuperApp {
+
 
     public static void main(String[] args) {
 
@@ -15,8 +18,10 @@ public class SuperApp {
 
         System.out.println("\n");
 
+
         while(hero1.isAlive() && villian1.isAlive()){
             System.out.println("Spiderman is attacking");
+            hero1.addPowerUp();
             hero1.fight(villian1);
             System.out.println(villian1.getStatus());
             if(!villian1.isAlive()){
@@ -26,6 +31,7 @@ public class SuperApp {
             System.out.println("\n");
 
             System.out.println("Green Goblin is attacking");
+            villian1.addVillianPowerUp();
             villian1.fight(hero1);
             System.out.println(hero1.getStatus());
 
@@ -36,12 +42,14 @@ public class SuperApp {
             }
         }
 
-        System.out.println("The battle has ended!");
+        System.out.println("\nThe battle has ended!");
         if (hero1.isAlive()){
             System.out.println("The winner of the Arena of Death is " + hero1.getStatus());
         }else{
             System.out.println("The winner of the Arena of Death is " + villian1.getStatus());
         }
+        hero1.printBattleLog();
+        villian1.printBattleLog();
 
         /*SuperPerson superAbraham = new SuperPerson("Abraham", 100);
         SuperHero superKevin = new SuperHero("Kevin", 100,25);
