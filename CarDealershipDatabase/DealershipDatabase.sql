@@ -69,3 +69,35 @@ CREATE TABLE leaseContract(
         ON DELETE SET NULL
 	
 ) AUTO_INCREMENT = 10000;
+
+-- Sample data for dealerships
+INSERT INTO dealerships (name, address, phone) VALUES
+('Speedy Motors', '123 Fast Lane, Dallas, Tx', '214-555-1234'),
+('Auto Galazy', '456 Star galaxy Blvd, Houston, Tx', '713-555-5678'),
+('Prime Auto', '789 market st, Austin, Tx','512-555-7890');
+
+-- Sample data for vehicles
+INSERT INTO vehicles(VIN, Year, Make, Model, Type, Color, Odometer, Price) VALUES
+(1001, 2020, 'Toyota', 'Camry', 'Sedan', 'White', 25000, 21000.00),
+(1002, 2021, 'Honda', 'Civic', 'Sedan', 'Black', 12000, 19500.00),
+(1003, 2019, 'Ford', 'F-150', 'Truck', 'Blue', 40000, 27500.00),
+(1004, 2022, 'Tesla', 'Model 3', 'Sedan', 'Red', 5000, 39999.99),
+(1005, 2023, 'Chevrolet', 'Tahoe', 'SUV', 'Silver', 8000, 48000.00);
+
+-- Sample data for Inventory
+INSERT INTO Inventory (dealershipID, VIN) VALUES
+(1, 1001),
+(1, 1004),
+(2, 1002),
+(2, 1003),
+(3, 1005);
+
+-- Sample data for sales contracts
+INSERT INTO salesContract (salesDate, Name, Email, Financed, VIN, totalPrice, monthlyPrice) VALUES
+('2025-05-15', 'John Doe', 'johndoe@example.com', TRUE, 1001, 22000.00, 366.67),
+('2025-05-20', 'Alice Smith', 'alice.smith@example.com', FALSE, 1002, 19500.00, NULL);
+
+-- Sample data for lease contracts
+INSERT INTO leaseContract (salesDate, Name, Email, VIN, totalPrice, monthlyPrice) VALUES
+('2025-06-01', 'Mark Johnson', 'markj@example.com', 1004, 23999.94, 666.67),
+('2025-06-03', 'Emma Lee', 'emma.lee@example.com', 1005, 28800.00, 800.00);
