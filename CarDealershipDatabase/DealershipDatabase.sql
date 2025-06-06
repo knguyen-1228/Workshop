@@ -5,7 +5,7 @@ USE CarDealership;
 
 -- Table 1: dealership
 CREATE TABLE dealerships (
-	dealershipID INT AUTO_INCREMENT,
+	dealershipID INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(50),
     address VARCHAR(50),
     phone VARCHAR(12),
@@ -14,7 +14,7 @@ CREATE TABLE dealerships (
 
 -- Table 2: Vehicles
 CREATE TABLE vehicles (
-	VIN INT NOT NULL,
+	VIN INT NOT NULL UNIQUE, 
     Year INT,
     Make VARCHAR(30),
     Model VARCHAR(30),
@@ -27,36 +27,38 @@ CREATE TABLE vehicles (
 
 -- Table 3: Inventory
 CREATE TABLE Inventory(
-	dealershipID INT,
-    VIN INT,
+	dealershipID INT NOT NULL,
+    VIN INT NOT NULL,
     PRIMARY KEY (dealershipID, VIN),
-    FOREIGN KEY (dealershipID) 
+    FOREIGN KEY (dealersColumnshipID) 
 		REFERENCES dealerships(dealershipID)
         ON DELETE CASCADE,
 	FOREIGN KEY (VIN) 
 		REFERENCES vehicles(VIN)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 -- Table 4: salesContract
 CREATE TABLE salesContract(
-	contractID INT AUTO_INCREMENT,
+	contractID INT NOT NULL AUTO_INCREMENT,
     salesDate DATE,
     Name VARCHAR(30),
     Email VARCHAR(40),
-    Financed BOOLEAN,
-    VIN INT,
+    Financed BOOLEAN DEFAULT FALSE,
+    VIN INT NOT NULL,
     totalPrice DECIMAL(10,2),
     monthlyPrice DECIMAL(10,2) DEFAULT NULL,
     PRIMARY KEY (contractID),
     FOREIGN KEY (VIN)
 		REFERENCES vehicles(VIN)
         ON DELETE SET NULL
+        ON UPDATE CASCADE
 ) AUTO_INCREMENT = 10000;
 
 -- Table 5: leaseContract
 CREATE TABLE leaseContract(
-	contractID INT AUTO_INCREMENT,
+	contractID INT NOT NULL AUTO_INCREMENT,
     salesDate DATE,
     Name VARCHAR(30),
     Email VARCHAR(40),
@@ -67,7 +69,7 @@ CREATE TABLE leaseContract(
     FOREIGN KEY (VIN)
 		REFERENCES vehicles(VIN)
         ON DELETE SET NULL
-	
+        ON UPDATE CASCADE
 ) AUTO_INCREMENT = 10000;
 
 -- Sample data for dealerships
